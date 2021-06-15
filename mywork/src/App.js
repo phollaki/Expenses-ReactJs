@@ -1,8 +1,9 @@
-import Header from "./Header";
+import Header from "./components/Header";
 import "./App.css";
-import Expenses from "./Expenses";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
-function App() {
+const App = () => {
   const expenses = [
     {
       id: "e1",
@@ -24,12 +25,18 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+  const getExpenseDataHandler = (expense) => {
+    console.log("App rétegben van!");
+    console.log(expense);
+  };
+
   return (
     <div>
       <Header />
+      <NewExpense onGetExpenseData={getExpenseDataHandler} />
       <Expenses items={expenses} />
     </div>
   );
-}
+};
 
 export default App;
