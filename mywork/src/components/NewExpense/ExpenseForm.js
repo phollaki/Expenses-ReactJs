@@ -5,25 +5,21 @@ function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
-
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
-    console.log(enteredTitle);
   };
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
-    console.log(enteredAmount);
   };
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
-    console.log(enteredDate);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
     props.onSaveExpenseData(expenseData);
@@ -42,6 +38,7 @@ function ExpenseForm(props) {
               type="text"
               value={enteredTitle}
               onChange={titleChangeHandler}
+              required
             ></input>
           </div>
           <div className="new-expense__control">
@@ -51,6 +48,7 @@ function ExpenseForm(props) {
               min="0.01"
               step="0.01"
               value={enteredAmount}
+              required
               onChange={amountChangeHandler}
             ></input>
           </div>
@@ -61,16 +59,19 @@ function ExpenseForm(props) {
               min="2019-01-01"
               max="2022-12-31"
               value={enteredDate}
+              required
               onChange={dateChangeHandler}
             ></input>
           </div>
         </div>
         <div className="new-expense__actions">
-          <button type="submit"></button>
+          <button type="button" onClick={props.onCancel}>
+            Cancel
+          </button>
+          <button type="submit">Submit</button>
         </div>
       </form>
     </div>
   );
 }
-
 export default ExpenseForm;
